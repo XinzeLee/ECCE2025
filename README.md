@@ -1,7 +1,7 @@
 # ECCE2025
 
 * Open the tutorial in Google Colab:<br>
-<a href="https://colab.research.google.com/github/xinzelee/ECCE2025/blob/main/ECCE2025_tutorial.ipynb" target="_blank">
+<a href="https://colab.research.google.com/github/xinzelee/ECCE2025/blob/main/ECCE2025_tutorial_colab.ipynb" target="_blank">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="ECCE2025-Open In Colab" style="height:48px;">
 </a>
 <br><br>
