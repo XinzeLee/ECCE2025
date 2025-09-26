@@ -515,7 +515,7 @@ def plot_classification_results(
 
 def plot_2d_zvs_classification(D1_original, D2_original, zvs_mesh, P_fixed, Vref_fixed):
     """
-    Plots a 2D classification scatter plot for ZVS conditions with different colors.
+    Plots a 2D classification plot for ZVS conditions using square/rectangle patches (pcolormesh) with less dazzling colors.
 
     Parameters:
         D1_original (np.ndarray): Array of D1 values.
@@ -525,24 +525,49 @@ def plot_2d_zvs_classification(D1_original, D2_original, zvs_mesh, P_fixed, Vref
         Vref_fixed (float or str): Fixed Vref value for the plot title.
     """
     import matplotlib.pyplot as plt
+    import numpy as np
+    from matplotlib.patches import Patch
+    from matplotlib.colors import ListedColormap
 
     plt.figure(figsize=(10, 8))
 
-    # Define colors and labels for different ZVS conditions
-    colors = ['red', 'green', 'blue']  # ZVS=4, ZVS=6, ZVS=8
+    # Define less dazzling colors for different ZVS conditions
+    colors = ['#8da0cb', '#a6d854', '#ffd92f']  # muted blue, green, yellow
     labels = ['ZVS=4', 'ZVS=6', 'ZVS=8']
+    cmap = ListedColormap(colors)
 
-    # Create scatter plot with different colors for each ZVS condition
-    for zvs_value in [0, 1, 2]:  # 0=ZVS=4, 1=ZVS=6, 2=ZVS=8
-        mask = zvs_mesh == zvs_value
-        plt.scatter(D1_original[mask], D2_original[mask],
-                    c=colors[zvs_value], label=labels[zvs_value], alpha=0.7, s=20)
+    # Create a grid for pcolormesh
+    # We'll bin the data into a 2D histogram and plot with pcolormesh
+    nbins = 40
+    D1_bins = np.linspace(np.min(D1_original), np.max(D1_original), nbins + 1)
+    D2_bins = np.linspace(np.min(D2_original), np.max(D2_original), nbins + 1)
 
+    # For each bin, assign the most common ZVS class in that bin
+    hist = np.full((nbins, nbins), np.nan)
+    for i in range(nbins):
+        for j in range(nbins):
+            mask = (
+                (D1_original >= D1_bins[i]) & (D1_original < D1_bins[i+1]) &
+                (D2_original >= D2_bins[j]) & (D2_original < D2_bins[j+1])
+            )
+            if np.any(mask):
+                # Assign the most frequent class in this bin
+                vals, counts = np.unique(zvs_mesh[mask], return_counts=True)
+                hist[j, i] = vals[np.argmax(counts)]
+
+    # Plot with pcolormesh
+    mesh = plt.pcolormesh(
+        D1_bins, D2_bins, hist,
+        cmap=cmap, shading='auto', vmin=0, vmax=2, alpha=0.8
+    )
+
+    # Custom legend using patches
+    legend_handles = [Patch(facecolor=colors[i], edgecolor='grey', label=labels[i]) for i in range(3)]
     plt.xlabel('D1')
     plt.ylabel('D2')
-    plt.title(f'2D ZVS Classification Plot: D1 vs D2\n(P={P_fixed}, Vref={Vref_fixed})')
-    plt.legend()
-    plt.grid(True, alpha=0.3)
+    plt.title(f'2D ZVS Classification Plot (Squares): D1 vs D2\n(P={P_fixed}, Vref={Vref_fixed})')
+    plt.legend(handles=legend_handles)
+    plt.grid(True, alpha=0.2)
     plt.tight_layout()
     plt.show()
 
