@@ -91,52 +91,52 @@ def plot_and_summarize_pca_results(
     import matplotlib.pyplot as plt
     import numpy as np
 
-    fig, axes = plt.subplots(2, 2, figsize=(15, 12))
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
     # Plot 1: Explained variance ratio
-    axes[0, 0].bar(range(1, len(explained_variance_ratio) + 1), explained_variance_ratio, alpha=0.7)
-    axes[0, 0].set_xlabel('Principal Component')
-    axes[0, 0].set_ylabel('Explained Variance Ratio')
-    axes[0, 0].set_title('Explained Variance Ratio by Principal Component')
-    axes[0, 0].grid(True, alpha=0.3)
+    axes[0].bar(range(1, len(explained_variance_ratio) + 1), explained_variance_ratio, alpha=0.7)
+    axes[0].set_xlabel('Principal Component')
+    axes[0].set_ylabel('Explained Variance Ratio')
+    axes[0].set_title('Explained Variance Ratio by Principal Component')
+    axes[0].grid(True, alpha=0.3)
 
     # Plot 2: Cumulative explained variance
-    axes[0, 1].plot(
+    axes[1].plot(
         range(1, len(cumulative_variance_ratio) + 1),
         cumulative_variance_ratio,
         'bo-',
         linewidth=2,
         markersize=8
     )
-    axes[0, 1].axhline(y=0.95, color='r', linestyle='--', alpha=0.7, label='95% Variance')
-    axes[0, 1].axhline(y=0.99, color='orange', linestyle='--', alpha=0.7, label='99% Variance')
-    axes[0, 1].set_xlabel('Number of Principal Components')
-    axes[0, 1].set_ylabel('Cumulative Explained Variance Ratio')
-    axes[0, 1].set_title('Cumulative Explained Variance Ratio')
-    axes[0, 1].legend()
-    axes[0, 1].grid(True, alpha=0.3)
+    axes[1].axhline(y=0.95, color='r', linestyle='--', alpha=0.7, label='95% Variance')
+    axes[1].axhline(y=0.99, color='orange', linestyle='--', alpha=0.7, label='99% Variance')
+    axes[1].set_xlabel('Number of Principal Components')
+    axes[1].set_ylabel('Cumulative Explained Variance Ratio')
+    axes[1].set_title('Cumulative Explained Variance Ratio')
+    axes[1].legend()
+    axes[1].grid(True, alpha=0.3)
 
-    # Plot 3: First two principal components scatter plot
-    axes[1, 0].scatter(X_pca_transformed[:, 0], X_pca_transformed[:, 1], alpha=0.6, s=20)
-    axes[1, 0].set_xlabel(f'PC1 ({explained_variance_ratio[0]:.3f} variance)')
-    axes[1, 0].set_ylabel(f'PC2 ({explained_variance_ratio[1]:.3f} variance)')
-    axes[1, 0].set_title('First Two Principal Components')
-    axes[1, 0].grid(True, alpha=0.3)
+    # # Plot 3: First two principal components scatter plot
+    # axes[1, 0].scatter(X_pca_transformed[:, 0], X_pca_transformed[:, 1], alpha=0.6, s=20)
+    # axes[1, 0].set_xlabel(f'PC1 ({explained_variance_ratio[0]:.3f} variance)')
+    # axes[1, 0].set_ylabel(f'PC2 ({explained_variance_ratio[1]:.3f} variance)')
+    # axes[1, 0].set_title('First Two Principal Components')
+    # axes[1, 0].grid(True, alpha=0.3)
 
-    # Plot 4: Feature loadings for first two principal components
-    loadings = pca.components_[:2, :]
-    x_pos = np.arange(len(pca_features))
-    width = 0.35
+    # # Plot 4: Feature loadings for first two principal components
+    # loadings = pca.components_[:2, :]
+    # x_pos = np.arange(len(pca_features))
+    # width = 0.35
 
-    axes[1, 1].bar(x_pos - width/2, loadings[0], width, label='PC1', alpha=0.7)
-    axes[1, 1].bar(x_pos + width/2, loadings[1], width, label='PC2', alpha=0.7)
-    axes[1, 1].set_xlabel('Features')
-    axes[1, 1].set_ylabel('Loading Values')
-    axes[1, 1].set_title('Feature Loadings for First Two Principal Components')
-    axes[1, 1].set_xticks(x_pos)
-    axes[1, 1].set_xticklabels(pca_features, rotation=45)
-    axes[1, 1].legend()
-    axes[1, 1].grid(True, alpha=0.3)
+    # axes[1, 1].bar(x_pos - width/2, loadings[0], width, label='PC1', alpha=0.7)
+    # axes[1, 1].bar(x_pos + width/2, loadings[1], width, label='PC2', alpha=0.7)
+    # axes[1, 1].set_xlabel('Features')
+    # axes[1, 1].set_ylabel('Loading Values')
+    # axes[1, 1].set_title('Feature Loadings for First Two Principal Components')
+    # axes[1, 1].set_xticks(x_pos)
+    # axes[1, 1].set_xticklabels(pca_features, rotation=45)
+    # axes[1, 1].legend()
+    # axes[1, 1].grid(True, alpha=0.3)
 
     plt.tight_layout()
     plt.show()
@@ -156,13 +156,13 @@ def plot_and_summarize_pca_results(
     print(f"95% variance: {np.argmax(cumulative_variance_ratio >= 0.95) + 1}")
     print(f"99% variance: {np.argmax(cumulative_variance_ratio >= 0.99) + 1}")
 
-    print(f"\nFeature loadings for PC1:")
-    for feature, loading in zip(pca_features, pca.components_[0]):
-        print(f"{feature}: {loading:.4f}")
+    # print(f"\nFeature loadings for PC1:")
+    # for feature, loading in zip(pca_features, pca.components_[0]):
+    #     print(f"{feature}: {loading:.4f}")
 
-    print(f"\nFeature loadings for PC2:")
-    for feature, loading in zip(pca_features, pca.components_[1]):
-        print(f"{feature}: {loading:.4f}")
+    # print(f"\nFeature loadings for PC2:")
+    # for feature, loading in zip(pca_features, pca.components_[1]):
+    #     print(f"{feature}: {loading:.4f}")
 
 def plot_tsne_analysis(
     df_final,
@@ -324,10 +324,10 @@ def plot_and_report_model_performance(
     # Plot predictions vs actual
     plt.subplot(1, 2, 2)
     plt.scatter(y_test, y_pred, alpha=0.6)
-    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
+    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2, label='Ideal (y_test = y_pred)')
     plt.xlabel('Actual ipk2pk')
     plt.ylabel('Predicted ipk2pk')
-    plt.title(f'Predictions vs Actual\nR² = {r2:.4f}')
+    plt.title(f'Predictions vs Actual (test set)\nR² = {r2:.4f}')
     plt.grid(True, alpha=0.3)
 
     plt.tight_layout()
