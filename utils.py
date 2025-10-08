@@ -329,6 +329,7 @@ def plot_and_report_model_performance(
     plt.ylabel('Predicted ipk2pk')
     plt.title(f'Predictions vs Actual (test set)\nR² = {r2:.4f}')
     plt.grid(True, alpha=0.3)
+    plt.legend()  # Show the label for the ideal curve
 
     plt.tight_layout()
     plt.show()
