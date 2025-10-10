@@ -8,8 +8,8 @@
 
 ## Description
 <p align="center">
-  <img src="docs/Guideline1.png" alt="Guideline 1" width="500"/><br>
-  <img src="docs/Guideline2.png" alt="Guideline 2" width="500"/>
+  <img src="docs/Guideline1.png" alt="Guideline 1" width="800"/><br>
+  <img src="docs/Guideline2.png" alt="Guideline 2" width="800"/>
 </p>
 
 ## Code Author
