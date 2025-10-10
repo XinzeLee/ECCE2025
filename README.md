@@ -7,12 +7,14 @@
 <br><br>
 
 ## Description
-This part to be filled.
+<p align="center">
+  <img src="docs/Guideline1.png" alt="Guideline 1" width="500"/><br>
+  <img src="docs/Guideline2.png" alt="Guideline 2" width="500"/>
+</p>
 
 ## Code Author
 @code-author: <br>
 * Xinze Li (email: xinzeli831@gmail.com)
-* Fanfan Lin (email: fanfanlin31@gmail.com)
 
 <br><br>
 ## License
