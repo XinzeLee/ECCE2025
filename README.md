@@ -20,3 +20,20 @@
 ## License
 
 This code is licensed under the [Apache License Version 2.0](./LICENSE).
+
+<br><br>
+## Citation
+
+If you use this repository in your research or project, please cite the following papers:
+
+```
+[1] F. Lin, X. Zhang, X. Li, C. Sun, W. Cai and Z. Zhang, 
+"Automatic Triple Phase-Shift Modulation for DAB Converter With Minimized Power Loss," 
+IEEE Transactions on Industry Applications, vol. 58, no. 3, pp. 3840-3851, May-June 2022, 
+doi: 10.1109/TIA.2021.3136501.
+
+[2] X. Li, X. Zhang, F. Lin, C. Sun and K. Mao, 
+"Artificial-Intelligence-Based Triple Phase Shift Modulation for Dual Active Bridge Converter With Minimized Current Stress," 
+IEEE Journal of Emerging and Selected Topics in Power Electronics, vol. 11, no. 4, pp. 4430-4441, Aug. 2023, 
+doi: 10.1109/JESTPE.2021.3105522.
+```
